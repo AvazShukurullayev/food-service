@@ -11,6 +11,7 @@
     <VParag class="dishes-card__price">$ {{ item.price }}</VParag>
     <VParag class="dishes-card__desc"
       >{{ item.quantity }} {{ item.desc }}
+      ozgarish
       </VParag
     >
   </div>
