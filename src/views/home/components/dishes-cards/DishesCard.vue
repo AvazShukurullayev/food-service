@@ -13,7 +13,6 @@
       >{{ item.quantity }} {{ item.desc }}
       </VParag
     >
-    vsdfvsdfvsdfv
   </div>
 </template>
 

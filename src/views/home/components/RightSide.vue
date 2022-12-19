@@ -53,7 +53,6 @@
         </div>
       </div>
       <div class="mt-2">
-        vsdfvsdfv
         <VButton @click="$emit('moveToPayment')" class="payment_btn"
           >Continue to Payment</VButton
         >
