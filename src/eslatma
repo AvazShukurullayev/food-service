@@ -1,0 +1,7 @@
+backend dan kevotgan data ni vuex ga array tarzda saqlab 
+va osha array orqali operatsiyalar bajarib keyin result ni 
+backend ga jonatish uchun kerak boladi vuex - bu backend dan 
+kegan data ni saqlab turish uchun kerak boladi hozir mani 
+vuex im kak backend bolib qogan 
+
+crud da shuning uchun backend dan kevotgan zapros ni vuex orqali ishlatvotganakanmande

@@ -1,0 +1,95 @@
+@font-face {
+  font-family: "Barlow-Regular";
+  src: url("./fonts/Barlow/Barlow-Regular.ttf");
+  font-style: normal;
+  font-weight: 400;
+}
+@font-face {
+  font-family: "Barlow-Medium";
+  src: url("./fonts/Barlow/Barlow-Medium.ttf");
+  font-style: normal;
+  font-weight: 500;
+}
+@font-face {
+  font-family: "Barlow-SemiBold";
+  src: url("./fonts/Barlow/Barlow-SemiBold.ttf");
+  font-style: normal;
+  font-weight: 600;
+}
+
+:root {
+  --text: #fff;
+}
+
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Barlow-Regular", sans-serif;
+  font-size: 16px;
+  min-height: 100vh;
+  background-color: #252836;
+}
+
+ul,
+ol,
+li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+}
+
+.payment_btn {
+  width: 100%;
+  background: #ea7c69;
+  box-shadow: 0px 8px 24px rgba(234, 124, 105, 0.3);
+  border-radius: 8px;
+  padding: 14px;
+  border: none;
+  outline: none;
+  font-family: "Barlow-SemiBold";
+  font-size: 14px;
+  line-height: 140%;
+  color: #fafafa;
+  cursor: pointer;
+  transition: 0.3s all ease-in-out;
+  &:hover {
+    background: #f37059;
+  }
+}
+.basket {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #ea7c69;
+  border-radius: 8px;
+  background: transparent;
+  cursor: pointer;
+}
+.dishes__select {
+  background: #1f1d2b;
+  border: 1px solid #393c49;
+  border-radius: 8px;
+  font-family: "Barlow-Medium";
+  font-size: 14px;
+  line-height: 130%;
+  color: #fff;
+  padding: 15px 14px;
+}
