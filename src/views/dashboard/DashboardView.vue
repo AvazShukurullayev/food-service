@@ -1,7 +1,7 @@
 <template>
   <div class="dashboard">
     <div class="dashboard__header">
-      <VHeadingTwo>Dashboard</VHeadingTwo>
+      <VHeadingTwo>Dashboard Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium, sint nulla. Nesciunt.</VHeadingTwo>
       <VParag>Tuesday 2 Feb, 2021</VParag>
     </div>
 
