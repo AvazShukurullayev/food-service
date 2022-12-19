@@ -2,7 +2,7 @@
   <li
     class="menu-item"
     :class="{ selected: item.selected }"
-    @click="actSelectedItem(index)"
+    @click="actionSelectedItem(index)"
   >
     {{ item.name }}
   </li>
@@ -18,7 +18,7 @@ export default {
     return {};
   },
   methods: {
-    ...mapActions(["actSelectedItem"]),
+    ...mapActions(["actionSelectedItem"]),
   },
 };
 </script>

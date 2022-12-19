@@ -3,11 +3,13 @@
     <div class="main-side">
       <header class="main-side__header">
         <div>
-          <VHeadingOne class="main-side__title">Jaegar Resto</VHeadingOne>
+          <VHeadingOne class="main-side__title">{{
+            getCustomer.fullName
+          }}</VHeadingOne>
           <VParag class="main-side__date">
-            {{ getDay[new Date().getUTCDay()] }}, {{ new Date().getDate() }}
-            {{ getMonth[new Date().getMonth()] }}
-            {{ new Date().getFullYear() }}y {{ getCurrentTime }}
+            {{ days[new Date().getUTCDay()] }}, {{ new Date().getDate() }}
+            {{ months[new Date().getMonth()] }}
+            {{ new Date().getFullYear() }}y {{ currentTime }}
           </VParag>
         </div>
         <VInput
@@ -16,12 +18,16 @@
           v-model="inputWord"
         />
       </header>
+      <!--? VLi component qo'shish kerak oldin check -->
       <ul class="menu-filter">
-        <MenuItem
+        <VLi
           v-for="(item, index) in getMenuList"
-          :item="item"
-          :index="index"
-        ></MenuItem>
+          class="menu-item"
+          :class="{ selected: item.selected }"
+          @click="actionSelectedItem(index)"
+        >
+          {{ item.name }}
+        </VLi>
       </ul>
       <div class="dishes">
         <VHeadingTwo class="dishes__title">Choose Dishes</VHeadingTwo>
@@ -29,10 +35,6 @@
           class="dishes__select"
           @selectArray="getOptionalMenu"
         ></VSelect>
-        <!-- <DishesOptional
-          :optionalMenu="getOptionalMenu"
-          @selectOption="selectOption"
-        ></DishesOptional> -->
       </div>
 
       <div class="dishes__cards">
@@ -44,12 +46,12 @@
       </div>
     </div>
     <RightSide
-      v-if="tempRightside"
+      v-if="isShown"
       :mealArray="getMealArray"
       @removeItem="removeItem"
       @moveToPayment="moveToPayment"
     ></RightSide>
-    <Payment v-if="tempPayment" @moveToRightSide="moveToRightSide"></Payment>
+    <Payment v-if="!isShown" @moveToRightSide="moveToRightSide"></Payment>
   </div>
 </template>
 
@@ -64,6 +66,7 @@ import VHeadingOne from "@/components/Vheadings/VHeadingOne.vue";
 import VHeadingTwo from "@/components/Vheadings/VHeadingTwo.vue";
 import VParag from "@/components/Vparag/VParag.vue";
 import VSelect from "@/components/Vselect/VSelect.vue";
+import VLi from "@/components/Vli/VLi.vue";
 
 import { mapGetters, mapActions } from "vuex";
 
@@ -80,12 +83,36 @@ export default {
     VHeadingTwo,
     VParag,
     VSelect,
+    VLi,
   },
   data() {
     return {
-      tempRightside: true,
-      tempPayment: false,
+      isShown: true,
       inputWord: "",
+      currentTime: "",
+      days: [
+        "Sunday",
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+      ],
+      months: [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December",
+      ],
     };
   },
   watch: {
@@ -102,13 +129,11 @@ export default {
     },
   },
   created() {
-    setInterval(this.getNow, 1000);
+    setInterval(this.getCurrentTime, 1000);
   },
   computed: {
     ...mapGetters([
-      "getDay",
-      "getMonth",
-      "getCurrentTime",
+      "getCustomer",
       "getMenuList",
       "getOptionalMenu",
       "getDishesList",
@@ -116,7 +141,11 @@ export default {
     ]),
   },
   methods: {
-    ...mapActions([]),
+    ...mapActions(["actionSelectedItem"]),
+    getCurrentTime() {
+      const today = new Date();
+      return (this.currentTime = `${today.getHours()}:${today.getMinutes()}:${today.getSeconds()}`);
+    },
     selectOption(index) {
       this.dishesList.forEach((element) => {
         if (
@@ -135,12 +164,10 @@ export default {
       console.log("result", index);
     },
     moveToPayment() {
-      this.tempRightside = false;
-      this.tempPayment = true;
+      this.isShown = !this.isShown;
     },
     moveToRightSide() {
-      this.tempRightside = true;
-      this.tempPayment = false;
+      this.isShown = !this.isShown;
     },
   },
 };
@@ -189,6 +216,19 @@ export default {
     row-gap: 58px;
     border-bottom: 1px solid #393c49;
     overflow-y: auto;
+    .menu-item {
+      font-family: "Barlow-SemiBold";
+      font-size: 14px;
+      line-height: 140%;
+      color: #fff;
+      cursor: pointer;
+      padding-bottom: 14px;
+      &.selected {
+        color: #ea7c69;
+        border-radius: 2px;
+        border-bottom: 3px solid #ea7c69;
+      }
+    }
   }
   .dishes {
     display: flex;

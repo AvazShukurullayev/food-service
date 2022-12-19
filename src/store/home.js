@@ -1,5 +1,6 @@
 const home = {
   state: {
+    customers: { fullName: "Jaegar Resto" },
     menuList: [
       { name: "All Dishes", selected: true, category: "all-dishes" },
       { name: "Hot Dishes", selected: false, category: "hot-dishes" },
@@ -234,6 +235,9 @@ const home = {
     ],
   },
   getters: {
+    getCustomer(state) {
+      return state.customers;
+    },
     getMenuList(state) {
       return state.menuList;
     },
@@ -261,7 +265,7 @@ const home = {
     },
   },
   actions: {
-    actSelectedItem({ commit }, payload) {
+    actionSelectedItem({ commit }, payload) {
       commit("setSelectedItem", payload);
     },
   },
