@@ -10,8 +10,10 @@
     <VHeadingThree class="dishes-card__title">{{ item.title }}</VHeadingThree>
     <VParag class="dishes-card__price">$ {{ item.price }}</VParag>
     <VParag class="dishes-card__desc"
-      >{{ item.quantity }} {{ item.desc }}</VParag
+      >{{ item.quantity }} {{ item.desc }}
+      </VParag
     >
+    vsdfvsdfvsdfv
   </div>
 </template>
 
