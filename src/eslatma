@@ -5,3 +5,10 @@ kegan data ni saqlab turish uchun kerak boladi hozir mani
 vuex im kak backend bolib qogan 
 
 crud da shuning uchun backend dan kevotgan zapros ni vuex orqali ishlatvotganakanmande
+
+// idea dishesCard ni ichida shunaqa obyekt berib oprional dan filtr qilsa boladi
+orderDish: {
+    delivery: true,
+    dineIn: true,
+    toGo: false,
+},

@@ -1,39 +1,42 @@
 <template>
   <div class="home">
-    <div class="main-side">
-      <header class="main-side__header">
+    <div class="mainSide">
+      <header class="mainSide__header">
         <div>
-          <VHeadingOne class="main-side__title">{{
+          <VHeadingOne class="mainSide__title">{{
             getCustomer.fullName
           }}</VHeadingOne>
-          <VParag class="main-side__date">
+          <VParag class="mainSide__date">
             {{ days[new Date().getUTCDay()] }}, {{ new Date().getDate() }}
             {{ months[new Date().getMonth()] }}
             {{ new Date().getFullYear() }}y {{ currentTime }}
           </VParag>
         </div>
         <VInput
-          class="main-side__input"
+          class="mainSide__input"
           placeholder="Search for food, coffee, etc.."
           v-model="inputWord"
         />
       </header>
-      <!--? VLi component qo'shish kerak oldin check -->
-      <ul class="menu-filter">
-        <VLi
+
+      <VList class="menuSide__filter">
+        <VItem
           v-for="(item, index) in getMenuList"
-          class="menu-item"
+          class="menuSide__item"
           :class="{ selected: item.selected }"
           @click="actionSelectedItem(index)"
         >
           {{ item.name }}
-        </VLi>
-      </ul>
+        </VItem>
+      </VList>
+      <!--! shetgacha logikani qilish kere  -->
+
       <div class="dishes">
         <VHeadingTwo class="dishes__title">Choose Dishes</VHeadingTwo>
         <VSelect
           class="dishes__select"
-          @selectArray="getOptionalMenu"
+          :selectArray="getOptionalMenu"
+          @change="actionSelect"
         ></VSelect>
       </div>
 
@@ -45,6 +48,7 @@
         />
       </div>
     </div>
+
     <RightSide
       v-if="isShown"
       :mealArray="getMealArray"
@@ -57,8 +61,6 @@
 
 <script>
 import RightSide from "./components/RightSide.vue";
-import MenuItem from "./components/menu-item/MenuItem.vue";
-import DishesOptional from "./components/dishes-optional/DishesOptional.vue";
 import DishesCard from "./components/dishes-cards/DishesCard.vue";
 import Payment from "./components/Payment.vue";
 import VInput from "@/components/Vinput/VInput.vue";
@@ -66,7 +68,8 @@ import VHeadingOne from "@/components/Vheadings/VHeadingOne.vue";
 import VHeadingTwo from "@/components/Vheadings/VHeadingTwo.vue";
 import VParag from "@/components/Vparag/VParag.vue";
 import VSelect from "@/components/Vselect/VSelect.vue";
-import VLi from "@/components/Vli/VLi.vue";
+import VList from "@/components/Vlist/VList.vue";
+import VItem from "@/components/Vitem/VItem.vue";
 
 import { mapGetters, mapActions } from "vuex";
 
@@ -74,8 +77,6 @@ export default {
   name: "HomeView",
   components: {
     RightSide,
-    MenuItem,
-    DishesOptional,
     DishesCard,
     Payment,
     VInput,
@@ -83,7 +84,8 @@ export default {
     VHeadingTwo,
     VParag,
     VSelect,
-    VLi,
+    VList,
+    VItem,
   },
   data() {
     return {
@@ -141,10 +143,13 @@ export default {
     ]),
   },
   methods: {
-    ...mapActions(["actionSelectedItem"]),
+    ...mapActions(["actionSelectedItem","actionSelect"]),
     getCurrentTime() {
       const today = new Date();
       return (this.currentTime = `${today.getHours()}:${today.getMinutes()}:${today.getSeconds()}`);
+    },
+    selectCategory(){
+      
     },
     selectOption(index) {
       this.dishesList.forEach((element) => {
@@ -174,27 +179,27 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.main-side {
+.mainSide {
   padding: 24px 433px 24px 128px;
-  .main-side__header {
+  .mainSide__header {
     display: flex;
     align-items: center;
     justify-content: space-between;
     margin-bottom: 24px;
-    .main-side__title {
+    .mainSide__title {
       font-family: "Barlow-SemiBold";
       font-size: 28px;
       line-height: 140%;
       color: #fff;
       margin-bottom: 4px;
     }
-    .main-side__date {
+    .mainSide__date {
       font-family: "Barlow";
       font-size: 16px;
       line-height: 140%;
       color: #e0e6e9;
     }
-    .main-side__input {
+    .mainSide__input {
       display: inline-block;
       width: 220px;
       padding: 14px;
@@ -209,14 +214,14 @@ export default {
       color: #abbbc2;
     }
   }
-  .menu-filter {
+  .menuSide__filter {
     display: flex;
     align-items: center;
     column-gap: 32px;
     row-gap: 58px;
     border-bottom: 1px solid #393c49;
     overflow-y: auto;
-    .menu-item {
+    .menuSide__item {
       font-family: "Barlow-SemiBold";
       font-size: 14px;
       line-height: 140%;
@@ -240,6 +245,16 @@ export default {
       font-size: 20px;
       line-height: 140%;
       color: #fff;
+    }
+    .dishes__select {
+      background: #1f1d2b;
+      border: 1px solid #393c49;
+      border-radius: 8px;
+      font-family: "Barlow-Medium";
+      font-size: 14px;
+      line-height: 130%;
+      color: #fff;
+      padding: 15px 14px;
     }
   }
   .dishes__cards {

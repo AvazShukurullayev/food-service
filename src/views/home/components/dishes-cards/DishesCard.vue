@@ -11,16 +11,16 @@
     <VParag class="dishes-card__price">$ {{ item.price }}</VParag>
     <VParag class="dishes-card__desc"
       >{{ item.quantity }} {{ item.desc }}
-      ozgarish
-      </VParag
-    >
+    </VParag>
   </div>
 </template>
 
 <script>
-import { mapGetters, mapActions } from "vuex";
 import VHeadingThree from "@/components/Vheadings/VHeadingThree.vue";
 import VParag from "@/components/Vparag/VParag.vue";
+
+import { mapGetters, mapActions } from "vuex";
+
 export default {
   props: ["item", "index"],
   components: { VHeadingThree, VParag },

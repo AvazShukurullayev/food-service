@@ -1,5 +1,5 @@
 <template>
-  <select name="" id="" @change="actSelectOption(index)">
+  <select name="" id="" @change="$emit('change',$event)">
     <option :value="item.orderDish" v-for="(item, index) in selectArray">
       {{ item.name }}
     </option>
@@ -7,12 +7,10 @@
 </template>
 
 <script>
-import {mapActions} from "vuex"
 export default {
   props: ["selectArray"],
   methods: {
-    ...mapActions(["actSelectOption"])
-  }
+  },
 };
 </script>
 
