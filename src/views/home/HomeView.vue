@@ -149,7 +149,7 @@ export default {
       return (this.currentTime = `${today.getHours()}:${today.getMinutes()}:${today.getSeconds()}`);
     },
     selectCategory(){
-      
+      console.log("djdjfd")
     },
     selectOption(index) {
       this.dishesList.forEach((element) => {
