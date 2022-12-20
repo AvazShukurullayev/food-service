@@ -11,9 +11,9 @@ const home = {
       { name: "Dessert", selected: false, category: "dessert" },
     ],
     optionalMenu: [
-      { name: "Dine in", orderDish: "dine-in" },
-      { name: "To go", orderDish: "go-to" },
       { name: "Delivery", orderDish: "delivery" },
+      { name: "Dine in", orderDish: "dineIn" },
+      { name: "To go", orderDish: "toGo" },
     ],
     dishesList: [
       {
@@ -25,7 +25,11 @@ const home = {
         desc: "Bowls available",
         category: "hot-dishes",
         isShown: true,
-        orderDish: "delivery",
+        orderDish: {
+          delivery: true,
+          dineIn: true,
+          toGo: false,
+        },
         id: 1,
       },
       {
@@ -37,7 +41,11 @@ const home = {
         desc: "Bowls available",
         category: "cold-dishes",
         isShown: true,
-        orderDish: "dine-in",
+        orderDish: {
+          delivery: false,
+          dineIn: true,
+          toGo: true,
+        },
         id: 2,
       },
       {
@@ -49,7 +57,11 @@ const home = {
         desc: "Bowls available",
         category: "grill",
         isShown: true,
-        orderDish: "delivery",
+        orderDish: {
+          delivery: true,
+          dineIn: true,
+          toGo: false,
+        },
         id: 3,
       },
       {
@@ -61,7 +73,11 @@ const home = {
         desc: "Bowls available",
         category: "appetizer",
         isShown: true,
-        orderDish: "dine-in",
+        orderDish: {
+          delivery: true,
+          dineIn: true,
+          toGo: true,
+        },
         id: 4,
       },
       {
@@ -73,7 +89,11 @@ const home = {
         desc: "Bowls available",
         category: "hot-dishes",
         isShown: true,
-        orderDish: "dine-in",
+        orderDish: {
+          delivery: true,
+          dineIn: false,
+          toGo: true,
+        },
         id: 5,
       },
       {
@@ -85,7 +105,11 @@ const home = {
         desc: "Bowls available",
         category: "grill",
         isShown: true,
-        orderDish: "dine-in",
+        orderDish: {
+          delivery: false,
+          dineIn: true,
+          toGo: false,
+        },
         id: 6,
       },
       {
@@ -97,7 +121,11 @@ const home = {
         desc: "Bowls available",
         category: "soup",
         isShown: true,
-        orderDish: "delivery",
+        orderDish: {
+          delivery: false,
+          dineIn: true,
+          toGo: true,
+        },
         id: 7,
       },
       {
@@ -109,7 +137,11 @@ const home = {
         desc: "Bowls available",
         category: "hot-dishes",
         isShown: true,
-        orderDish: "dine-in",
+        orderDish: {
+          delivery: true,
+          dineIn: true,
+          toGo: true,
+        },
         id: 8,
       },
       {
@@ -121,7 +153,11 @@ const home = {
         desc: "Bowls available",
         category: "dessert",
         isShown: true,
-        orderDish: "delivery",
+        orderDish: {
+          delivery: true,
+          dineIn: true,
+          toGo: true,
+        },
         id: 9,
       },
       {
@@ -133,7 +169,11 @@ const home = {
         desc: "Bowls available",
         category: "cold-dishes",
         isShown: true,
-        orderDish: "dine-in",
+        orderDish: {
+          delivery: true,
+          dineIn: false,
+          toGo: false,
+        },
         id: 10,
       },
       {
@@ -145,7 +185,11 @@ const home = {
         desc: "Bowls available",
         category: "grill",
         isShown: true,
-        orderDish: "go-to",
+        orderDish: {
+          delivery: true,
+          dineIn: false,
+          toGo: true,
+        },
         id: 11,
       },
       {
@@ -157,7 +201,11 @@ const home = {
         desc: "Bowls available",
         category: "grill",
         isShown: true,
-        orderDish: "go-to",
+        orderDish: {
+          delivery: true,
+          dineIn: true,
+          toGo: true,
+        },
         id: 12,
       },
       {
@@ -169,7 +217,11 @@ const home = {
         desc: "Bowls available",
         category: "appetizer",
         isShown: true,
-        orderDish: "delivery",
+        orderDish: {
+          delivery: false,
+          dineIn: false,
+          toGo: true,
+        },
         id: 13,
       },
       {
@@ -181,7 +233,11 @@ const home = {
         desc: "Bowls available",
         category: "appetizer",
         isShown: true,
-        orderDish: "go-to",
+        orderDish: {
+          delivery: true,
+          dineIn: true,
+          toGo: false,
+        },
         id: 14,
       },
       {
@@ -193,7 +249,11 @@ const home = {
         desc: "Bowls available",
         category: "soup",
         isShown: true,
-        orderDish: "dine-in",
+        orderDish: {
+          delivery: true,
+          dineIn: true,
+          toGo: true,
+        },
         id: 15,
       },
       {
@@ -205,7 +265,11 @@ const home = {
         desc: "Bowls available",
         category: "soup",
         isShown: true,
-        orderDish: "dine-in",
+        orderDish: {
+          delivery: true,
+          dineIn: false,
+          toGo: false,
+        },
         id: 16,
       },
       {
@@ -215,9 +279,13 @@ const home = {
         quantity: 13,
         counter: 0,
         desc: "Bowls available",
-        category: "dessert",
+        category: "appetizer",
         isShown: true,
-        orderDish: "go-to",
+        orderDish: {
+          delivery: true,
+          dineIn: true,
+          toGo: false,
+        },
         id: 17,
       },
       {
@@ -227,9 +295,13 @@ const home = {
         quantity: 17,
         counter: 0,
         desc: "Bowls available",
-        category: "dessert",
+        category: "appetizer",
         isShown: true,
-        orderDish: "dine-in",
+        orderDish: {
+          delivery: true,
+          dineIn: false,
+          toGo: true,
+        },
         id: 18,
       },
       {
@@ -241,7 +313,11 @@ const home = {
         desc: "Bowls available",
         category: "dessert",
         isShown: true,
-        orderDish: "dine-in",
+        orderDish: {
+          delivery: false,
+          dineIn: true,
+          toGo: true,
+        },
         id: 19,
       },
       {
@@ -253,7 +329,11 @@ const home = {
         desc: "Bowls available",
         category: "dessert",
         isShown: true,
-        orderDish: "dine-in",
+        orderDish: {
+          delivery: true,
+          dineIn: true,
+          toGo: true,
+        },
         id: 20,
       },
       {
@@ -265,7 +345,11 @@ const home = {
         desc: "Bowls available",
         category: "dessert",
         isShown: true,
-        orderDish: "dine-in",
+        orderDish: {
+          delivery: true,
+          dineIn: true,
+          toGo: false,
+        },
         id: 21,
       },
       {
@@ -275,9 +359,13 @@ const home = {
         quantity: 17,
         counter: 0,
         desc: "Bowls available",
-        category: "dessert",
+        category: "soup",
         isShown: true,
-        orderDish: "dine-in",
+        orderDish: {
+          delivery: false,
+          dineIn: false,
+          toGo: true,
+        },
         id: 22,
       },
       {
@@ -287,9 +375,13 @@ const home = {
         quantity: 17,
         counter: 0,
         desc: "Bowls available",
-        category: "dessert",
+        category: "soup",
         isShown: true,
-        orderDish: "dine-in",
+        orderDish: {
+          delivery: true,
+          dineIn: false,
+          toGo: true,
+        },
         id: 23,
       },
       {
@@ -299,9 +391,13 @@ const home = {
         quantity: 17,
         counter: 0,
         desc: "Bowls available",
-        category: "dessert",
+        category: "hot-dishes",
         isShown: true,
-        orderDish: "dine-in",
+        orderDish: {
+          delivery: true,
+          dineIn: true,
+          toGo: true,
+        },
         id: 24,
       },
       {
@@ -311,9 +407,13 @@ const home = {
         quantity: 17,
         counter: 0,
         desc: "Bowls available",
-        category: "dessert",
+        category: "hot-dishes",
         isShown: true,
-        orderDish: "dine-in",
+        orderDish: {
+          delivery: true,
+          dineIn: false,
+          toGo: false,
+        },
         id: 25,
       },
       {
@@ -323,9 +423,13 @@ const home = {
         quantity: 17,
         counter: 0,
         desc: "Bowls available",
-        category: "dessert",
+        category: "hot-dishes",
         isShown: true,
-        orderDish: "dine-in",
+        orderDish: {
+          delivery: true,
+          dineIn: true,
+          toGo: true,
+        },
         id: 26,
       },
       {
@@ -335,9 +439,13 @@ const home = {
         quantity: 17,
         counter: 0,
         desc: "Bowls available",
-        category: "dessert",
+        category: "cold-dishes",
         isShown: true,
-        orderDish: "dine-in",
+        orderDish: {
+          delivery: false,
+          dineIn: true,
+          toGo: false,
+        },
         id: 27,
       },
       {
@@ -347,9 +455,13 @@ const home = {
         quantity: 17,
         counter: 0,
         desc: "Bowls available",
-        category: "dessert",
+        category: "cold-dishes",
         isShown: true,
-        orderDish: "dine-in",
+        orderDish: {
+          delivery: true,
+          dineIn: false,
+          toGo: false,
+        },
         id: 28,
       },
       {
@@ -359,9 +471,13 @@ const home = {
         quantity: 17,
         counter: 0,
         desc: "Bowls available",
-        category: "dessert",
+        category: "cold-dishes",
         isShown: true,
-        orderDish: "dine-in",
+        orderDish: {
+          delivery: true,
+          dineIn: false,
+          toGo: true,
+        },
         id: 29,
       },
     ],
@@ -380,44 +496,20 @@ const home = {
     getDishesList(state) {
       return state.dishesList;
     },
+    getSelectedDishesList(state) {
+      return state.selectedDishesList;
+    },
   },
   mutations: {
-    /* setSelectedItem(state, data) {
-      state.dishesList.forEach((element) => {
-        if (element.category == state.menuList[data].category) {
-          element.isShown = true;
-        } else {
-          element.isShown = false;
-        }
-      });
-      state.menuList.forEach((element) => (element.selected = false));
-      state.menuList[data].selected = true;
-      if (state.menuList[data].category == "all-dishes") {
-        state.dishesList.forEach((element) => (element.isShown = true));
-      }
-    }, */
-    setSelectedItem(state, data) {
-      state.dishesList.forEach((element) => {
-        if (element.category == state.menuList[data].category) {
-          element.isShown = true;
-        } else {
-          element.isShown = false;
-        }
-      });
-      state.menuList.forEach((element) => (element.selected = false));
-      state.menuList[data].selected = true;
-      if (state.menuList[data].category == "all-dishes") {
-        state.dishesList.forEach((element) => (element.isShown = true));
-      }
+    setSelectedDishesArray(state, data) {
+      console.log("Payload", data);
+      state.selectedDishesList = data;
     },
   },
   actions: {
-    actionSelectedItem({ commit }, payload) {
-      console.log("action selected item => ", payload);
-      commit("setSelectedItem", payload);
-    },
-    actionSelect({ commit }, payload) {
-      console.log("action select => ", payload.target.value);
+    actionSelectedDishesArray({ commit }, payload) {
+      // console.log("getSelectedDishesList => ", payload);
+      commit("setSelectedDishesArray", payload);
     },
   },
 };

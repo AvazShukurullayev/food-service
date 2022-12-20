@@ -20,29 +20,28 @@
       </header>
 
       <VList class="menuSide__filter">
-        <VItem
+        <li
           v-for="(item, index) in getMenuList"
           class="menuSide__item"
           :class="{ selected: item.selected }"
-          @click="actionSelectedItem(index)"
+          @click="selectCategory(index)"
         >
           {{ item.name }}
-        </VItem>
+        </li>
       </VList>
-      <!--! shetgacha logikani qilish kere  -->
 
       <div class="dishes">
         <VHeadingTwo class="dishes__title">Choose Dishes</VHeadingTwo>
         <VSelect
           class="dishes__select"
           :selectArray="getOptionalMenu"
-          @change="actionSelect"
+          @change="selectedOption"
         ></VSelect>
       </div>
 
       <div class="dishes__cards">
         <DishesCard
-          v-for="(item, index) in getDishesList"
+          v-for="(item, index) in getSelectedDishesList"
           :item="item"
           :index="index"
         />
@@ -119,9 +118,7 @@ export default {
   },
   watch: {
     inputWord(newItem, oldItem) {
-      console.log(newItem);
-      console.log(oldItem);
-      this.getDishesList.forEach((element) => {
+      this.getSelectedDishesList.forEach((element) => {
         if (element.title.toLowerCase().includes(newItem.toLowerCase())) {
           element.isShown = true;
         } else {
@@ -137,31 +134,59 @@ export default {
     ...mapGetters([
       "getCustomer",
       "getMenuList",
-      "getOptionalMenu",
+      "getSelectedDishesList",
       "getDishesList",
+      "getOptionalMenu",
       "getMealArray",
     ]),
   },
+  mounted() {
+    // clone qilish jarayoni
+    const allDishesArray = this.getDishesList.map((element) => {
+      element.isShown = true;
+      return element;
+    });
+    this.actionSelectedDishesArray(allDishesArray);
+  },
   methods: {
-    ...mapActions(["actionSelectedItem","actionSelect"]),
+    ...mapActions(["actionSelectedDishesArray"]),
     getCurrentTime() {
       const today = new Date();
       return (this.currentTime = `${today.getHours()}:${today.getMinutes()}:${today.getSeconds()}`);
     },
-    selectCategory(){
-      console.log("djdjfd")
-    },
-    selectOption(index) {
-      this.dishesList.forEach((element) => {
-        if (
-          element.orderDish == this.optionalMenu[index.target.value].orderDish
-        ) {
+    selectCategory(index) {
+      if (this.getMenuList[index].category == "all-dishes") {
+        this.getMenuList.forEach((element) => (element.selected = false));
+        this.getMenuList[index].selected = true;
+        // clone qilish jarayoni
+        const allDishesArray = this.getDishesList.map((element) => {
           element.isShown = true;
-        } else {
-          element.isShown = false;
-        }
-      });
+          return element;
+        });
+        this.actionSelectedDishesArray(allDishesArray);
+      } else {
+        const selectedArray = this.getDishesList.filter((item) => {
+          if (item.category == this.getMenuList[index].category) {
+            return (item.isShown = true);
+          } else {
+            item.isShown = false;
+          }
+        });
+        this.getMenuList.forEach((element) => (element.selected = false));
+        this.getMenuList[index].selected = true;
+        this.actionSelectedDishesArray(selectedArray);
+      }
     },
+    selectedOption(par) {
+      let parametr = par.target.value;
+      console.log("parametr => ", parametr);
+      let filteredArray = this.getDishesList.filter(
+        (element) => element.orderDish[parametr]
+      );
+      // all bolsa hammasini UI ga chizib qoy
+      this.actionSelectedDishesArray(filteredArray);
+    },
+
     removeItem(par) {
       console.log("parametr", par);
       const index = this.mealArray.findIndex((item) => item.id == par);
