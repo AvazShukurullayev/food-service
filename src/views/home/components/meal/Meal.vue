@@ -13,7 +13,7 @@
             <VParag class="meal__left-price">$ {{ item.price }}</VParag>
           </div>
         </div>
-        <VInput class="meal__left-count" min="1" v-model="item.count" />
+        <VInput class="meal__left-count" min="1" v-model="item.counter" />
       </div>
       <div class="meal__left-bottom">
         <VInput
@@ -25,9 +25,10 @@
     </div>
     <div class="meal__right">
       <VParag class="meal__right-sum">$ {{ getSum(index) }}</VParag>
-      <VButton class="basket" @click="$emit('removeMeal', item.id)"
-        ><img src="@/assets/images/basket/basket.svg" alt="basket"
-      /></VButton>
+
+      <VButton class="basket" @click="$emit('removeMeal', item.id)">
+        <img src="@/assets/images/basket/basket.svg" alt="basket" />
+      </VButton>
     </div>
   </div>
 </template>
@@ -41,17 +42,13 @@ export default {
   name: "Meal",
   props: ["item", "index", "mealArray"],
   components: { VInput, VButton, VParag },
-  data() {
-    return {};
-  },
   methods: {
     getSum(index) {
-      const sumOfMeal = Number((this.item.price * this.item.count).toFixed(2));
+      const sumOfMeal = Number(
+        (this.item.price * this.item.counter).toFixed(2)
+      );
       this.mealArray[index].sum = sumOfMeal;
       return sumOfMeal;
-    },
-    removeMeal(par) {
-      this.$emit("removeMeal", par);
     },
   },
 };

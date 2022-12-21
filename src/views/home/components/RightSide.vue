@@ -33,8 +33,8 @@
         v-for="(item, index) in mealArray"
         :item="item"
         :index="index"
-        @removeMeal="removeMeal"
         :mealArray="mealArray"
+        @removeMeal="$emit('removeItem', $event)"
       />
     </div>
     <div class="rightSide__footer">
@@ -94,7 +94,7 @@ export default {
   },
   methods: {
     ...mapActions([]),
-    addDiscount() {
+   /*  addDiscount() {
       let sumDis = 0;
       this.mealArray.forEach((element) => {
         sumDis += element.discount;
@@ -113,9 +113,7 @@ export default {
       this.service = par;
       return par;
     },
-    removeMeal(par) {
-      this.$emit("removeItem", par);
-    },
+   
     changedMeal() {
       console.log("changedMeal", changedMeal);
       this.total =
@@ -123,7 +121,7 @@ export default {
         this.addSum() * (this.clickedDiscount() / 100) -
         this.addDiscount();
       console.log("this.total: " + this.total);
-    },
+    }, */
   },
 };
 </script>

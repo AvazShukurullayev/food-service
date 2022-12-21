@@ -143,7 +143,7 @@ export default {
   mounted() {
     // clone qilish jarayoni
     const allDishesArray = this.getDishesList.map((element) => element);
-    console.log("mounted methods => ", allDishesArray);
+    // console.log("mounted methods => ", allDishesArray);
     this.actionSelectedDishesArray(allDishesArray);
   },
   methods: {
@@ -189,16 +189,13 @@ export default {
         this.actionSelectedDishesArray(filteredArray);
       }
     },
-    // shetta mealArray ga tayyor object jonatish kerak
-    //1. boshida array empty boladi
-    //2. takrorlanishni oldini olish va count++ qilish kerak
-    clickedCard(par, ind) {
+    clickedCard(par, index) {
       console.log("getMealArray", this.getMealArray);
       const checkElement = this.getMealArray.includes(par);
       if (this.getMealArray.length == 0) {
         this.actionClickedCard(par);
       } else if (checkElement) {
-        this.getMealArray[ind].count++;
+        this.getMealArray[index].counter++;
       } else {
         this.actionClickedCard(par);
       }
@@ -213,10 +210,10 @@ export default {
 
     //
     removeItem(par) {
-      console.log("parametr", par);
-      const index = this.mealArray.findIndex((item) => item.id == par);
-      this.mealArray.splice(index, 1);
-      console.log("result", index);
+      console.log("parametr1", par);
+      /* const index = this.getMealArray.findIndex((item) => item.id == par);
+      this.getMealArray.splice(index, 1);
+      console.log("result", index); */
     },
   },
 };
