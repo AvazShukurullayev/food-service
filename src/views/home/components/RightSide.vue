@@ -1,11 +1,11 @@
 <template>
-  <div class="right-side">
-    <div class="right-side__header">
-      <VHeadingTwo class="right-side__title"
+  <div class="rightSide">
+    <div class="rightSide__header">
+      <VHeadingTwo class="rightSide__title"
         >Orders #{{ orderNumber }}</VHeadingTwo
       >
       <div class="rightSide__services">
-        <!-- radio qilish kerak -->
+        <!--? radio type value beradi  -->
         <template v-for="(item, index) in serviceList">
           <VInput
             type="radio"
@@ -20,15 +20,15 @@
           }}</VLabel>
         </template>
       </div>
-      <div class="right-side__info">
-        <VParag class="right-side__info-text">Item</VParag>
+      <div class="rightSide__info">
+        <VParag class="rightSide__info-text">Item</VParag>
         <div>
-          <VParag class="right-side__info-text">Qty</VParag>
-          <VParag class="right-side__info-text">Price</VParag>
+          <VParag class="rightSide__info-text">Qty</VParag>
+          <VParag class="rightSide__info-text">Price</VParag>
         </div>
       </div>
     </div>
-    <div class="right-side__meals">
+    <div class="rightSide__meals">
       <Meal
         v-for="(item, index) in mealArray"
         :item="item"
@@ -37,19 +37,20 @@
         :mealArray="mealArray"
       />
     </div>
-    <div class="right-side__footer">
+    <div class="rightSide__footer">
       <div>
-        <div class="right-side__footer-card d-flex">
-          <VParag class="right-side__footer-discount">Discount</VParag>
-          <VParag class="right-side__footer-price">$ {{ discount }}</VParag>
+        <!-- ? v-for qilish kere -->
+        <div class="rightSide__footer-card d-flex">
+          <VParag class="rightSide__footer-discount">Discount</VParag>
+          <VParag class="rightSide__footer-price">$ {{ discount }}</VParag>
         </div>
-        <div class="right-side__footer-card d-flex">
-          <VParag class="right-side__footer-discount">Service</VParag>
-          <VParag class="right-side__footer-price">% {{ service }}</VParag>
+        <div class="rightSide__footer-card d-flex">
+          <VParag class="rightSide__footer-discount">Service</VParag>
+          <VParag class="rightSide__footer-price">% {{ service }}</VParag>
         </div>
-        <div class="right-side__footer-card d-flex">
-          <VParag class="right-side__footer-discount">Sub total</VParag>
-          <VParag class="right-side__footer-price">$ {{ getTotal }}</VParag>
+        <div class="rightSide__footer-card d-flex">
+          <VParag class="rightSide__footer-discount">Sub total</VParag>
+          <VParag class="rightSide__footer-price">$ getTotal</VParag>
         </div>
       </div>
       <div class="mt-2">
@@ -62,12 +63,13 @@
 </template>
 
 <script>
-import VInput from "@/components/Vinput/VInput.vue";
 import Meal from "./meal/Meal.vue";
+import VInput from "@/components/Vinput/VInput.vue";
 import VButton from "@/components/Vbutton/VButton.vue";
 import VHeadingTwo from "@/components/Vheadings/VHeadingTwo.vue";
 import VParag from "@/components/Vparag/VParag.vue";
 import VLabel from "@/components/Vlabel/VLabel.vue";
+
 import { mapGetters, mapActions } from "vuex";
 export default {
   name: "RightSide",
@@ -127,7 +129,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.right-side {
+.rightSide {
   width: 409px;
   padding: 24px;
   min-height: 100vh;
@@ -140,9 +142,9 @@ export default {
   right: 0;
   top: 0;
   bottom: 0;
-  .right-side__header {
+  &__header {
     border-bottom: 1px solid #393c49;
-    .right-side__title {
+    .rightSide__title {
       font-family: "Barlow-SemiBold";
       font-size: 20px;
       line-height: 140%;
@@ -152,12 +154,12 @@ export default {
     .rightSide__services {
       margin-bottom: 24px;
     }
-    .right-side__filter {
+    .rightSide__filter {
       display: flex;
       column-gap: 8px;
       margin-bottom: 24px;
     }
-    .right-side__info {
+    .rightSide__info {
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -166,7 +168,7 @@ export default {
         display: flex;
         column-gap: 43px;
       }
-      .right-side__info-text {
+      .rightSide__info-text {
         font-family: "Barlow-SemiBold";
         font-size: 16px;
         line-height: 140%;
@@ -175,25 +177,25 @@ export default {
       }
     }
   }
-  .right-side__meals {
+  .rightSide__meals {
     scroll-behavior: auto;
     overflow: auto;
     scrollbar-width: thin;
     scrollbar-color: rgb(232, 14, 14);
   }
-  .right-side__footer {
+  .rightSide__footer {
     border-top: 1px solid #393c49;
     padding-top: 24px;
-    .right-side__footer-card {
+    &-card {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      .right-side__footer-discount {
+      .rightSide__footer-discount {
         font-size: 14px;
         line-height: 140%;
         color: #abbbc2;
       }
-      .right-side__footer-price {
+      .rightSide__footer-price {
         font-family: "Barlow-Medium";
         font-size: 16px;
         line-height: 140%;

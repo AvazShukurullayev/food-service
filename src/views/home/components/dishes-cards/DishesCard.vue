@@ -1,5 +1,5 @@
 <template>
-  <div class="dishes-card" v-if="item.isShown" @click="clickedCardAct(item.id)">
+  <div class="dishes-card" v-if="item.isShown" @click="$emit('click', item,ind)">
     <div class="dishes-card-image">
       <img
         class="dishes-card__img"

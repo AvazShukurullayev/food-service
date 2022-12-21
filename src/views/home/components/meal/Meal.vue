@@ -9,8 +9,8 @@
             alt="meal img"
           />
           <div>
-            <p class="meal__left-text">{{ item.title }}</p>
-            <p class="meal__left-price">$ {{ item.price }}</p>
+            <VParag class="meal__left-text">{{ item.title }}</VParag>
+            <VParag class="meal__left-price">$ {{ item.price }}</VParag>
           </div>
         </div>
         <VInput class="meal__left-count" min="1" v-model="item.count" />
@@ -24,7 +24,7 @@
       </div>
     </div>
     <div class="meal__right">
-      <p class="meal__right-sum">$ {{ getSum(index) }}</p>
+      <VParag class="meal__right-sum">$ {{ getSum(index) }}</VParag>
       <VButton class="basket" @click="$emit('removeMeal', item.id)"
         ><img src="@/assets/images/basket/basket.svg" alt="basket"
       /></VButton>
@@ -35,11 +35,12 @@
 <script>
 import VInput from "@/components/Vinput/VInput.vue";
 import VButton from "@/components/Vbutton/VButton.vue";
+import VParag from "@/components/Vparag/VParag.vue";
 
 export default {
   name: "Meal",
   props: ["item", "index", "mealArray"],
-  components: { VInput, VButton },
+  components: { VInput, VButton, VParag },
   data() {
     return {};
   },

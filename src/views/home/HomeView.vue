@@ -38,16 +38,16 @@
           @change="selectedOption"
         ></VSelect>
       </div>
-
       <div class="dishes__cards">
         <DishesCard
           v-for="(item, index) in getSelectedDishesList"
           :item="item"
           :index="index"
+          @click="clickedCard"
         />
       </div>
     </div>
-
+    <!--? rightside ga meal array bervomman va remove button va move to payment -->
     <RightSide
       v-if="isShown"
       :mealArray="getMealArray"
@@ -142,14 +142,12 @@ export default {
   },
   mounted() {
     // clone qilish jarayoni
-    const allDishesArray = this.getDishesList.map((element) => {
-      element.isShown = true;
-      return element;
-    });
+    const allDishesArray = this.getDishesList.map((element) => element);
+    console.log("mounted methods => ", allDishesArray);
     this.actionSelectedDishesArray(allDishesArray);
   },
   methods: {
-    ...mapActions(["actionSelectedDishesArray"]),
+    ...mapActions(["actionSelectedDishesArray", "actionClickedCard"]),
     getCurrentTime() {
       const today = new Date();
       return (this.currentTime = `${today.getHours()}:${today.getMinutes()}:${today.getSeconds()}`);
@@ -159,10 +157,9 @@ export default {
         this.getMenuList.forEach((element) => (element.selected = false));
         this.getMenuList[index].selected = true;
         // clone qilish jarayoni
-        const allDishesArray = this.getDishesList.map((element) => {
-          element.isShown = true;
-          return element;
-        });
+        const allDishesArray = this.getDishesList.map(
+          (element) => element.isShown
+        );
         this.actionSelectedDishesArray(allDishesArray);
       } else {
         const selectedArray = this.getDishesList.filter((item) => {
@@ -177,27 +174,49 @@ export default {
         this.actionSelectedDishesArray(selectedArray);
       }
     },
+    // selected qiganda yana bug chiqvotti buni otirib debugging qilish kerak
     selectedOption(par) {
       let parametr = par.target.value;
       console.log("parametr => ", parametr);
-      let filteredArray = this.getDishesList.filter(
-        (element) => element.orderDish[parametr]
-      );
-      // all bolsa hammasini UI ga chizib qoy
-      this.actionSelectedDishesArray(filteredArray);
+      if (parametr == "all") {
+        const allSelectedOption = this.getDishesList.map((element) => element);
+        console.log("allSelectedOption => ", allSelectedOption);
+        this.actionSelectedDishesArray(allSelectedOption);
+      } else {
+        let filteredArray = this.getDishesList.filter(
+          (element) => element.orderDish[parametr]
+        );
+        this.actionSelectedDishesArray(filteredArray);
+      }
     },
-
-    removeItem(par) {
-      console.log("parametr", par);
-      const index = this.mealArray.findIndex((item) => item.id == par);
-      this.mealArray.splice(index, 1);
-      console.log("result", index);
+    // shetta mealArray ga tayyor object jonatish kerak
+    //1. boshida array empty boladi
+    //2. takrorlanishni oldini olish va count++ qilish kerak
+    clickedCard(par, ind) {
+      console.log("getMealArray", this.getMealArray);
+      const checkElement = this.getMealArray.includes(par);
+      if (this.getMealArray.length == 0) {
+        this.actionClickedCard(par);
+      } else if (checkElement) {
+        this.getMealArray[ind].count++;
+      } else {
+        this.actionClickedCard(par);
+      }
+      console.log("clickedCard element => ", par);
     },
     moveToPayment() {
       this.isShown = !this.isShown;
     },
     moveToRightSide() {
       this.isShown = !this.isShown;
+    },
+
+    //
+    removeItem(par) {
+      console.log("parametr", par);
+      const index = this.mealArray.findIndex((item) => item.id == par);
+      this.mealArray.splice(index, 1);
+      console.log("result", index);
     },
   },
 };
@@ -265,13 +284,13 @@ export default {
     align-items: center;
     justify-content: space-between;
     padding-top: 24px;
-    .dishes__title {
+    &__title {
       font-family: "Barlow-SemiBold";
       font-size: 20px;
       line-height: 140%;
       color: #fff;
     }
-    .dishes__select {
+    &__select {
       background: #1f1d2b;
       border: 1px solid #393c49;
       border-radius: 8px;

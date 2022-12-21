@@ -1,8 +1,8 @@
 <template>
   <div class="payment">
     <div class="payment__header">
-      <VHeadingTwo class="paymetn__title">Payment</VHeadingTwo>
-      <VParag class="payment__subtitle">3 payment method available</VParag>
+      <VHeadingTwo class="payment__title">Payment</VHeadingTwo>
+      <VParag class="payment__subtitle">3 payment methods available</VParag>
     </div>
     <!-- v-model ishlami qoldi paymentSystem da  -->
     <div class="payment__method">
@@ -10,6 +10,7 @@
         >Payment Method: {{ paymentSystem }}</VHeadingThree
       >
       <div class="payment__cards">
+        <!-- ? radio qilish kere value qaytaradi -->
         <template v-for="(item, index) in paymentList">
           <VInput
             type="radio"
@@ -58,6 +59,8 @@
       <div class="d-flex justify-content-between">
         <div class="payment__part">
           <VLabel for="pay__name" class="payment__name">Order type</VLabel>
+          <!--? VSelect ni qoyish kere  -->
+          <!-- <VSelect></VSelect> -->
           <select name="" id="" class="payment__part-select">
             <option value="">dine in</option>
             <option value="">to go</option>
@@ -93,10 +96,19 @@ import VHeadingTwo from "@/components/Vheadings/VHeadingTwo.vue";
 import VHeadingThree from "@/components/Vheadings/VHeadingThree.vue";
 import VParag from "@/components/Vparag/VParag.vue";
 import VLabel from "@/components/Vlabel/VLabel.vue";
+import VSelect from "@/components/Vselect/VSelect.vue";
 export default {
   name: "Payment",
   props: [],
-  components: { VInput, VButton, VHeadingTwo, VHeadingThree, VParag, VLabel },
+  components: {
+    VInput,
+    VButton,
+    VHeadingTwo,
+    VHeadingThree,
+    VParag,
+    VLabel,
+    VSelect,
+  },
   data() {
     return {
       paymentSystem: "",
@@ -139,7 +151,7 @@ export default {
   .payment__header {
     border-bottom: 1px solid #393c49;
     margin-bottom: 24px;
-    .paymetn__title {
+    .payment__title {
       font-family: "Barlow-SemiBold";
       font-size: 28px;
       line-height: 140%;
