@@ -1,19 +1,19 @@
 <template>
   <div
-    class="dishes-card"
+    class="dishesCard"
     v-if="item.isShown"
     @click="$emit('click', item, index)"
   >
-    <div class="dishes-card-image">
+    <div class="dishesCard__image">
       <img
-        class="dishes-card__img"
+        class="dishesCard__img"
         :src="require('@/assets/images/dishes/' + item?.img)"
         alt=""
       />
     </div>
-    <VHeadingThree class="dishes-card__title">{{ item.title }}</VHeadingThree>
-    <VParag class="dishes-card__price">$ {{ item.price }}</VParag>
-    <VParag class="dishes-card__desc"
+    <VHeadingThree class="dishesCard__title">{{ item.title }}</VHeadingThree>
+    <VParag class="dishesCard__price">$ {{ item.price }}</VParag>
+    <VParag class="dishesCard__desc"
       >{{ item.quantity }} {{ item.desc }}
     </VParag>
   </div>
@@ -41,7 +41,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.dishes-card {
+.dishesCard {
   // max-width: 192px;
   max-width: calc(100% / 3 - 28px);
   width: 100%;
@@ -50,15 +50,15 @@ export default {
   text-align: center;
   padding: 24px;
   cursor: pointer;
-  .dishes-card-image {
+  .dishesCard__image {
     margin: -36px auto 0;
     max-width: 150px;
-    .dishes-card__img {
+    .dishesCard__img {
       width: 100%;
       border-radius: 50%;
     }
   }
-  .dishes-card__title {
+  .dishesCard__title {
     margin-top: 14px;
     font-family: "Barlow-Medium";
     font-size: 14px;
@@ -66,13 +66,13 @@ export default {
     text-align: center;
     color: #fff;
   }
-  .dishes-card__price {
+  .dishesCard__price {
     margin-top: 8px;
     font-size: 14px;
     line-height: 140%;
     color: #fff;
   }
-  .dishes-card__desc {
+  .dishesCard__desc {
     margin-top: 4px;
     font-size: 14px;
     line-height: 140%;

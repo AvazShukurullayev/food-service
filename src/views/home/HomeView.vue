@@ -190,6 +190,8 @@ export default {
       }
     },
     clickedCard(par, index) {
+      console.log("par => ", par);
+      console.log("index => ", index);
       console.log("getMealArray", this.getMealArray);
       const checkElement = this.getMealArray.includes(par);
       if (this.getMealArray.length == 0) {
@@ -208,12 +210,12 @@ export default {
       this.isShown = !this.isShown;
     },
 
-    //
+    // ochirib tashalgan element dagi count by default qilish kerak
     removeItem(par) {
       console.log("parametr1", par);
-      /* const index = this.getMealArray.findIndex((item) => item.id == par);
+      const index = this.getMealArray.findIndex((item) => item.id == par);
       this.getMealArray.splice(index, 1);
-      console.log("result", index); */
+      console.log("result", index);
     },
   },
 };
