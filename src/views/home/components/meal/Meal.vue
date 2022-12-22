@@ -13,7 +13,14 @@
             <VParag class="meal__left-price">$ {{ item.price }}</VParag>
           </div>
         </div>
-        <VInput class="meal__left-count" min="1" v-model="item.counter" />
+        <VInput
+          type="number"
+          class="meal__left-counter"
+          min="1"
+          :max="item.maxLimit"
+          v-model="item.counter"
+        />
+        <!--? type="number" boganda e (eyler soni) ni togirlab qoyish kerak  -->
       </div>
       <div class="meal__left-bottom">
         <VInput
@@ -95,7 +102,7 @@ p {
         line-height: 140%;
         color: #abbbc2;
       }
-      .meal__left-count {
+      .meal__left-counter {
         max-width: 52px;
         width: 100%;
         min-height: 48px;

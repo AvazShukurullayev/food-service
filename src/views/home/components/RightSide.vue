@@ -1,9 +1,9 @@
 <template>
   <div class="rightSide">
     <div class="rightSide__header">
-      <VHeadingTwo class="rightSide__title"
-        >Orders #{{ orderNumber }}</VHeadingTwo
-      >
+      <VHeadingTwo class="rightSide__title">
+        Orders #{{ orderNumber }}
+      </VHeadingTwo>
       <div class="rightSide__services">
         <!--? radio type value beradi  -->
         <template v-for="(item, index) in serviceList">
@@ -50,13 +50,15 @@
         </div>
         <div class="rightSide__footer-card d-flex">
           <VParag class="rightSide__footer-discount">Sub total</VParag>
-          <VParag class="rightSide__footer-price">$ getTotal</VParag>
+          <VParag class="rightSide__footer-price"
+            >$ {{ total() }}</VParag
+          >
         </div>
       </div>
       <div class="mt-2">
-        <VButton @click="$emit('moveToPayment')" class="payment_btn"
-          >Continue to Payment</VButton
-        >
+        <VButton @click="$emit('moveToPayment')" class="payment_btn">
+          Continue to Payment
+        </VButton>
       </div>
     </div>
   </div>
@@ -90,38 +92,12 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["getTotal"]),
+    ...mapGetters(["getMealArray"]),
   },
   methods: {
-    ...mapActions([]),
-   /*  addDiscount() {
-      let sumDis = 0;
-      this.mealArray.forEach((element) => {
-        sumDis += element.discount;
-      });
-      return sumDis;
+    total(par) {
+      console.log("rightside => ", par);
     },
-    addSum() {
-      let sumPrice = 0;
-      this.mealArray.forEach((element) => {
-        sumPrice += element.sum;
-      });
-      return sumPrice;
-    },
-    clickedDiscount(par) {
-      console.log("parametr: " + par);
-      this.service = par;
-      return par;
-    },
-   
-    changedMeal() {
-      console.log("changedMeal", changedMeal);
-      this.total =
-        this.addSum() +
-        this.addSum() * (this.clickedDiscount() / 100) -
-        this.addDiscount();
-      console.log("this.total: " + this.total);
-    }, */
   },
 };
 </script>

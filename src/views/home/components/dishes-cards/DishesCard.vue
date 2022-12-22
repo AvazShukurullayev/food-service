@@ -34,6 +34,10 @@ export default {
   // max-width: 192px;
   max-width: calc(100% / 3 - 28px);
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
   background: #1f1d2b;
   border-radius: 16px;
   text-align: center;
@@ -42,7 +46,10 @@ export default {
   .dishesCard__image {
     margin: -36px auto 0;
     max-width: 150px;
+    min-width: 75px;
     .dishesCard__img {
+      object-fit: cover;
+      object-position: center;
       width: 100%;
       border-radius: 50%;
     }

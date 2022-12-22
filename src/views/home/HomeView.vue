@@ -1,6 +1,7 @@
 <template>
   <div class="home">
     <div class="mainSide">
+      <!-- <h2 class="bar"><i class="fa-solid fa-bars"></i></h2> -->
       <header class="mainSide__header">
         <div>
           <VHeadingOne class="mainSide__title">{{
@@ -188,16 +189,31 @@ export default {
       }
     },
     clickedCard(par, index) {
-      // console.log("par => ", par);
+      console.log("par => ", par);
       // console.log("index => ", index);
       // console.log("getMealArray", this.getMealArray);
       const checkElement = this.getMealArray.includes(par);
       if (this.getMealArray.length == 0) {
+        if (par.quantity > 0) {
+          par.quantity--;
+        } else {
+          console.log("Disabled qilish kere card ni va input ni ham!");
+        }
         this.actionClickedCard(par);
       } else if (checkElement) {
-        par.counter++;
+        if (par.quantity > 0) {
+          par.quantity--;
+          par.counter++;
+        } else {
+          console.log("Disabled qilish kere card ni va input ni ham!");
+        }
       } else {
         this.actionClickedCard(par);
+        if(par.quantity > 0){
+          par.quantity--;
+        } else {
+          console.log("Disabled qilish kerak card ni va input ni ham!");
+        }
       }
       console.log("clickedCard element => ", par);
     },
@@ -223,6 +239,9 @@ export default {
 </script>
 
 <style scoped lang="scss">
+/* .bar {
+  color: #fff;
+} */
 .mainSide {
   padding: 24px 433px 24px 128px;
   .mainSide__header {
