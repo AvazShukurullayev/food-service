@@ -43,7 +43,7 @@
           v-for="(item, index) in getSelectedDishesList"
           :item="item"
           :index="index"
-          @click="clickedCard"
+          @clickedCard="clickedCard"
         />
       </div>
     </div>
@@ -141,9 +141,7 @@ export default {
     ]),
   },
   mounted() {
-    // clone qilish jarayoni
     const allDishesArray = this.getDishesList.map((element) => element);
-    // console.log("mounted methods => ", allDishesArray);
     this.actionSelectedDishesArray(allDishesArray);
   },
   methods: {
@@ -190,14 +188,14 @@ export default {
       }
     },
     clickedCard(par, index) {
-      console.log("par => ", par);
-      console.log("index => ", index);
-      console.log("getMealArray", this.getMealArray);
+      // console.log("par => ", par);
+      // console.log("index => ", index);
+      // console.log("getMealArray", this.getMealArray);
       const checkElement = this.getMealArray.includes(par);
       if (this.getMealArray.length == 0) {
         this.actionClickedCard(par);
       } else if (checkElement) {
-        this.getMealArray[index].counter++;
+        par.counter++;
       } else {
         this.actionClickedCard(par);
       }
@@ -210,12 +208,15 @@ export default {
       this.isShown = !this.isShown;
     },
 
-    // ochirib tashalgan element dagi count by default qilish kerak
-    removeItem(par) {
-      console.log("parametr1", par);
-      const index = this.getMealArray.findIndex((item) => item.id == par);
-      this.getMealArray.splice(index, 1);
+    // ochirib tashalgan element dagi counter by default qilish kerak
+    removeItem(id) {
+      console.log("id => ", id);
+      const index = this.getMealArray.findIndex((item) => item.id == id);
       console.log("result", index);
+      console.log("getMealArray1 => ", this.getMealArray);
+      this.getMealArray[index].counter = 1;
+      this.getMealArray.splice(index, 1);
+      console.log("getMealArray2 => ", this.getMealArray);
     },
   },
 };

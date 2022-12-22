@@ -2,7 +2,7 @@
   <div
     class="dishesCard"
     v-if="item.isShown"
-    @click="$emit('click', item, index)"
+    @click="$emit('clickedCard', item, index)"
   >
     <div class="dishesCard__image">
       <img
@@ -23,20 +23,9 @@
 import VHeadingThree from "@/components/Vheadings/VHeadingThree.vue";
 import VParag from "@/components/Vparag/VParag.vue";
 
-import { mapGetters, mapActions } from "vuex";
-
 export default {
   props: ["item", "index"],
   components: { VHeadingThree, VParag },
-  data() {
-    return {};
-  },
-  computed: {
-    ...mapGetters([]),
-  },
-  methods: {
-    ...mapActions(["clickedCardAct"]),
-  },
 };
 </script>
 
