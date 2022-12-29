@@ -209,7 +209,7 @@ export default {
         }
       } else {
         this.actionClickedCard(par);
-        if(par.quantity > 0){
+        if (par.quantity > 0) {
           par.quantity--;
         } else {
           console.log("Disabled qilish kerak card ni va input ni ham!");
