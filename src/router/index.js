@@ -4,6 +4,7 @@ import HomeView from "../views/home/HomeView.vue";
 import DashboardView from "../views/dashboard/DashboardView.vue";
 import DiscountView from "../views/discount/DiscountView.vue";
 import ExitView from "../views/exit/ExitView.vue";
+import HouseView from "../views/house/HouseView.vue";
 import MessageView from "../views/message/MessageView.vue";
 import NotificationView from "../views/notification/NotificationView.vue";
 import SettingsView from "../views/settings/SettingsView.vue";
@@ -30,6 +31,11 @@ const routes = [
     path: "/exit",
     name: "exit",
     component: ExitView,
+  },
+  {
+    path: "/",
+    name: "house",
+    component: HouseView,
   },
   {
     path: "/message",

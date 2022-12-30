@@ -171,6 +171,7 @@ export default {
         this.getMenuList.forEach((element) => (element.selected = false));
         this.getMenuList[index].selected = true;
         this.actionSelectedDishesArray(selectedArray);
+        console.log("174 line of HomeView for github"); 
       }
     },
     // selected qiganda yana bug chiqvotti buni otirib debugging qilish kerak
