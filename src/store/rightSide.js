@@ -13,11 +13,18 @@ const rightSide = {
     setClickedCard(state, data) {
       state.mealArray.push(data);
     },
+    setRemovedElement(state, data) {
+      state.mealArray = data;
+    },
   },
   actions: {
     actionClickedCard({ commit }, payload) {
       console.log("actionClickedCard payload => ", payload);
       commit("setClickedCard", payload);
+    },
+    actionRemovedElement({ commit }, payload) {
+      console.log("actionRemovedElement => ", payload);
+      commit("setRemovedElement", payload);
     },
   },
 };

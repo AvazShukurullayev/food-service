@@ -41,7 +41,7 @@
           class="dishes__select"
           :selectArray="getOptionalMenu"
           @change="selectedOption"
-        ></VSelect>
+        />
       </div>
       <!-- ✅ -->
 
@@ -61,9 +61,9 @@
       v-if="isShown"
       :mealArray="getMealArray"
       @removeItem="removeItem"
-      @moveToPayment="moveToPayment"
-    ></RightSide>
-    <Payment v-if="!isShown" @moveToRightSide="moveToRightSide"></Payment>
+      @moveToPayment="isShown = !isShown"
+    />
+    <Payment v-if="!isShown" @moveToRightSide="isShown = !isShown" />
   </div>
 </template>
 
@@ -102,6 +102,7 @@ export default {
       currentTime: "",
       customerName: "Jonathan Mckinney",
       tempArray: [],
+      tempArrayParams: [],
       days: [
         "Sunday",
         "Monday",
@@ -154,7 +155,7 @@ export default {
     this.tempArray = this.getDishesList.map((element) => element);
   },
   methods: {
-    ...mapActions(["actionClickedCard"]),
+    ...mapActions(["actionClickedCard", "actionRemovedElement"]),
     // ✅
     getCurrentTime() {
       const today = new Date();
@@ -187,48 +188,51 @@ export default {
       }
     },
     // ✅
-
     clickedCard(par) {
       console.log("par => ", par);
-      console.log("getMealArray", this.getMealArray);
       const checkElement = this.getMealArray.includes(par);
       if (!checkElement) {
         if (par.quantity > 0) {
-          par.quantity--;
           this.actionClickedCard(par);
-        } else alert("Disabled qilish kere card ni va input ni ham!");
+          const newObj = {
+            id: par.id,
+            quantity: par.quantity,
+          };
+          this.tempArrayParams.push(newObj);
+          par.quantity--;
+        }
       } else if (checkElement) {
         if (par.quantity > 0) {
           par.quantity--;
           par.counter++;
-        } else alert("Disabled qilish kere card ni va input ni ham!");
+        }
       }
     },
-    moveToPayment() {
-      this.isShown = !this.isShown;
-    },
-    moveToRightSide() {
-      this.isShown = !this.isShown;
-    },
-
+    // input niyam disabled qilish kerak
+    // ✅
     // ochirib tashalgan element dagi counter by default qilish kerak
     removeItem(id) {
-      console.log("id => ", id);
-      const index = this.getMealArray.findIndex((item) => item.id == id);
-      console.log("result", index);
-      console.log("getMealArray1 => ", this.getMealArray);
-      this.getMealArray[index].counter = 1;
-      this.getMealArray.splice(index, 1);
-      console.log("getMealArray2 => ", this.getMealArray);
+      const removedElMealArray = this.getMealArray.filter(
+        (item) => item.id !== id
+      );
+      this.actionRemovedElement(removedElMealArray);
+      let quantityNumber;
+      this.tempArrayParams.forEach((item) => {
+        if (item.id === id) quantityNumber = item.quantity;
+      });
+      console.log("quantity number => ", quantityNumber);
+      this.tempArray = this.tempArray.map((item) => {
+        if (item.id === id) {
+          item.quantity = quantityNumber;
+        }
+        return item;
+      });
     },
   },
 };
 </script>
 
 <style scoped lang="scss">
-/* .bar {
-  color: #fff;
-} */
 .mainSide {
   padding: 24px 433px 24px 128px;
   .mainSide__header {

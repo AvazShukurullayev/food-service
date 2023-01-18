@@ -2,6 +2,7 @@
   <div
     class="dishesCard"
     v-if="item.isShown"
+    :disabled="item.quantity <= 0 ? true : false"
     @click="$emit('clickedCard', item)"
   >
     <div class="dishesCard__image">
@@ -18,6 +19,7 @@
     </VParag>
   </div>
 </template>
+<!-- :style="{ disabled: item.quantity <= 0 }" -->
 
 <script>
 import VHeadingThree from "@/components/Vheadings/VHeadingThree.vue";
