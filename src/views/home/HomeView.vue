@@ -179,7 +179,7 @@ export default {
     },
     // ✅
     selectedOption(par) {
-      if (par == "all") {
+      if (par === "all") {
         this.tempArray = this.getDishesList.map((element) => element);
       } else {
         this.tempArray = this.getDishesList.filter(
@@ -189,7 +189,6 @@ export default {
     },
     // ✅
     clickedCard(par) {
-      console.log("par => ", par);
       const checkElement = this.getMealArray.includes(par);
       if (!checkElement) {
         if (par.quantity > 0) {
@@ -210,7 +209,6 @@ export default {
     },
     // input niyam disabled qilish kerak
     // ✅
-    // ochirib tashalgan element dagi counter by default qilish kerak
     removeItem(id) {
       const removedElMealArray = this.getMealArray.filter(
         (item) => item.id !== id
@@ -228,6 +226,7 @@ export default {
         return item;
       });
     },
+    // ✅
   },
 };
 </script>
