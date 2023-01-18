@@ -10,14 +10,6 @@ import LeftSide from "@/components/left-side/LeftSide.vue";
 export default {
   name: "App",
   components: { LeftSide },
-  data() {
-    return {
-      // global functions
-    };
-  },
-  methods: {
-    // functions
-  },
 };
 </script>
 

@@ -618,13 +618,13 @@ const home = {
   },
   mutations: {
     setSelectedDishesArray(state, data) {
-      // console.log("Payload", data);
+      console.log("Payload", data);
       state.selectedDishesList = data;
     },
   },
   actions: {
     actionSelectedDishesArray({ commit }, payload) {
-      // console.log("getSelectedDishesList => ", payload);
+      console.log("getSelectedDishesList => ", payload);
       commit("setSelectedDishesArray", payload);
     },
   },

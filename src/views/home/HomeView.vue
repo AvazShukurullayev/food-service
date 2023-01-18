@@ -1,12 +1,11 @@
 <template>
   <div class="home">
     <div class="mainSide">
-      <!-- <h2 class="bar"><i class="fa-solid fa-bars"></i></h2> -->
       <header class="mainSide__header">
         <div>
-          <VHeadingOne class="mainSide__title">{{
-            getCustomer.fullName
-          }}</VHeadingOne>
+          <VHeadingOne class="mainSide__title">
+            {{ getCustomer.fullName }}
+          </VHeadingOne>
           <VParag class="mainSide__date">
             {{ days[new Date().getUTCDay()] }}, {{ new Date().getDate() }}
             {{ months[new Date().getMonth()] }}
@@ -14,7 +13,7 @@
           </VParag>
         </div>
         <VInput
-          class="mainSide__input"
+          class="mainSide__input form-control"
           placeholder="Search for food, coffee, etc.."
           v-model="inputWord"
         />
@@ -171,7 +170,7 @@ export default {
         this.getMenuList.forEach((element) => (element.selected = false));
         this.getMenuList[index].selected = true;
         this.actionSelectedDishesArray(selectedArray);
-        console.log("174 line of HomeView for github"); 
+        console.log("174 line of HomeView for github");
       }
     },
     // selected qiganda yana bug chiqvotti buni otirib debugging qilish kerak
