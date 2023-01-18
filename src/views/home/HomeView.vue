@@ -5,7 +5,7 @@
       <header class="mainSide__header">
         <div>
           <VHeadingOne class="mainSide__title">
-            {{ getCustomer.fullName }}
+            {{ customerName }}
           </VHeadingOne>
           <VParag class="mainSide__date">
             {{ days[new Date().getUTCDay()] }}, {{ new Date().getDate() }}
@@ -19,7 +19,9 @@
           v-model="inputWord"
         />
       </header>
+      <!-- ✅ -->
 
+      <!-- ✅ -->
       <VList class="menuSide__filter">
         <li
           v-for="item in getMenuList"
@@ -32,6 +34,7 @@
       </VList>
       <!-- ✅ -->
 
+      <!-- ✅ -->
       <div class="dishes">
         <VHeadingTwo class="dishes__title">Choose Dishes</VHeadingTwo>
         <VSelect
@@ -40,7 +43,9 @@
           @change="selectedOption"
         ></VSelect>
       </div>
+      <!-- ✅ -->
 
+      <!-- ✅ -->
       <div class="dishes__cards">
         <DishesCard
           v-for="(item, index) in tempArray"
@@ -50,6 +55,7 @@
         />
       </div>
     </div>
+    <!-- ✅ -->
     <!--? rightside ga meal array bervomman va remove button va move to payment -->
     <RightSide
       v-if="isShown"
@@ -94,6 +100,7 @@ export default {
       isShown: true,
       inputWord: "",
       currentTime: "",
+      customerName: "Jonathan Mckinney",
       tempArray: [],
       days: [
         "Sunday",
@@ -137,11 +144,9 @@ export default {
   },
   computed: {
     ...mapGetters([
-      "getCustomer",
       "getMenuList",
-      // "getSelectedDishesList",
-      "getDishesList",
       "getOptionalMenu",
+      "getDishesList",
       "getMealArray",
     ]),
   },
@@ -149,7 +154,7 @@ export default {
     this.tempArray = this.getDishesList.map((element) => element);
   },
   methods: {
-    // ...mapActions(["actionSelectedDishesArray", "actionClickedCard"]),
+    ...mapActions(["actionClickedCard"]),
     // ✅
     getCurrentTime() {
       const today = new Date();
@@ -171,50 +176,33 @@ export default {
         });
       }
     },
-
+    // ✅
     selectedOption(par) {
-      let parametr = par.target.value;
-      console.log("parametr => ", parametr);
-      if (parametr == "all") {
-        const allSelectedOption = this.getDishesList.map((element) => element);
-        console.log("allSelectedOption => ", allSelectedOption);
-        this.actionSelectedDishesArray(allSelectedOption);
+      if (par == "all") {
+        this.tempArray = this.getDishesList.map((element) => element);
       } else {
-        // ✅ shetta arrayni olib filter qilib keyin qaytadan yana chizish uchun jonatish
-        let filteredArray = this.getDishesList.filter(
-          (element) => element.orderDish[parametr]
+        this.tempArray = this.getDishesList.filter(
+          (element) => element.orderDish[par]
         );
-        this.actionSelectedDishesArray(filteredArray);
       }
     },
-    clickedCard(par, index) {
+    // ✅
+
+    clickedCard(par) {
       console.log("par => ", par);
-      // console.log("index => ", index);
-      // console.log("getMealArray", this.getMealArray);
+      console.log("getMealArray", this.getMealArray);
       const checkElement = this.getMealArray.includes(par);
-      if (this.getMealArray.length == 0) {
+      if (!checkElement) {
         if (par.quantity > 0) {
           par.quantity--;
-        } else {
-          console.log("Disabled qilish kere card ni va input ni ham!");
-        }
-        this.actionClickedCard(par);
+          this.actionClickedCard(par);
+        } else alert("Disabled qilish kere card ni va input ni ham!");
       } else if (checkElement) {
         if (par.quantity > 0) {
           par.quantity--;
           par.counter++;
-        } else {
-          console.log("Disabled qilish kere card ni va input ni ham!");
-        }
-      } else {
-        this.actionClickedCard(par);
-        if (par.quantity > 0) {
-          par.quantity--;
-        } else {
-          console.log("Disabled qilish kerak card ni va input ni ham!");
-        }
+        } else alert("Disabled qilish kere card ni va input ni ham!");
       }
-      console.log("clickedCard element => ", par);
     },
     moveToPayment() {
       this.isShown = !this.isShown;

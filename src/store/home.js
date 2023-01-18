@@ -1,6 +1,5 @@
 const home = {
   state: {
-    customers: { fullName: "Jaegar Resto" },
     menuList: [
       { name: "All Dishes", selected: true, category: "all-dishes", id: 1 },
       { name: "Hot Dishes", selected: false, category: "hot-dishes", id: 2 },
@@ -597,12 +596,8 @@ const home = {
         id: 29,
       },
     ],
-    // selectedDishesList: [],
   },
   getters: {
-    getCustomer(state) {
-      return state.customers;
-    },
     getMenuList(state) {
       return state.menuList;
     },
@@ -612,15 +607,9 @@ const home = {
     getDishesList(state) {
       return state.dishesList;
     },
-    // getSelectedDishesList(state) {
-    //   return state.selectedDishesList;
-    // },
   },
-  mutations: {
-    // setSelectedDishesArray(state, d
-  },
-  actions: {
-  },
+  mutations: {},
+  actions: {},
 };
 
 export default home;

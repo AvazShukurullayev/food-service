@@ -2,7 +2,7 @@
   <div
     class="dishesCard"
     v-if="item.isShown"
-    @click="$emit('clickedCard', item, index)"
+    @click="$emit('clickedCard', item)"
   >
     <div class="dishesCard__image">
       <img
@@ -13,8 +13,8 @@
     </div>
     <VHeadingThree class="dishesCard__title">{{ item.title }}</VHeadingThree>
     <VParag class="dishesCard__price">$ {{ item.price }}</VParag>
-    <VParag class="dishesCard__desc"
-      >{{ item.quantity }} {{ item.desc }}
+    <VParag class="dishesCard__desc">
+      {{ item.quantity }} {{ item.desc }}
     </VParag>
   </div>
 </template>
