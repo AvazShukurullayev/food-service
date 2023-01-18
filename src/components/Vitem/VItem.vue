@@ -5,7 +5,9 @@
 </template>
 
 <script>
-export default {};
+export default {
+  name: "VItem",
+};
 </script>
 
 <style></style>

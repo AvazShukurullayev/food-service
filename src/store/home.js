@@ -2,13 +2,13 @@ const home = {
   state: {
     customers: { fullName: "Jaegar Resto" },
     menuList: [
-      { name: "All Dishes", selected: true, category: "all-dishes" },
-      { name: "Hot Dishes", selected: false, category: "hot-dishes" },
-      { name: "Cold Dishes", selected: false, category: "cold-dishes" },
-      { name: "Soup", selected: false, category: "soup" },
-      { name: "Grill", selected: false, category: "grill" },
-      { name: "Appetizer", selected: false, category: "appetizer" },
-      { name: "Dessert", selected: false, category: "dessert" },
+      { name: "All Dishes", selected: true, category: "all-dishes", id: 1 },
+      { name: "Hot Dishes", selected: false, category: "hot-dishes", id: 2 },
+      { name: "Cold Dishes", selected: false, category: "cold-dishes", id: 3 },
+      { name: "Soup", selected: false, category: "soup", id: 4 },
+      { name: "Grill", selected: false, category: "grill", id: 5 },
+      { name: "Appetizer", selected: false, category: "appetizer", id: 6 },
+      { name: "Dessert", selected: false, category: "dessert", id: 7 },
     ],
     optionalMenu: [
       { name: "Delivery", orderDish: "delivery" },

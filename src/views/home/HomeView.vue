@@ -24,10 +24,11 @@
           v-for="(item, index) in getMenuList"
           class="menuSide__item"
           :class="{ selected: item.selected }"
-          @click="selectCategory(index)"
+          @click="selectCategory(item.category)"
         >
           {{ item.name }}
         </li>
+        <!-- ? man shetta argumentga id berib korgan bolardim test qilish uchun -->
       </VList>
 
       <div class="dishes">
@@ -38,6 +39,7 @@
           @change="selectedOption"
         ></VSelect>
       </div>
+
       <div class="dishes__cards">
         <DishesCard
           v-for="(item, index) in getSelectedDishesList"
@@ -146,34 +148,30 @@ export default {
   },
   methods: {
     ...mapActions(["actionSelectedDishesArray", "actionClickedCard"]),
+     // ✅
     getCurrentTime() {
       const today = new Date();
       return (this.currentTime = `${today.getHours()}:${today.getMinutes()}:${today.getSeconds()}`);
     },
-    selectCategory(index) {
-      if (this.getMenuList[index].category == "all-dishes") {
-        this.getMenuList.forEach((element) => (element.selected = false));
-        this.getMenuList[index].selected = true;
-        // clone qilish jarayoni
-        const allDishesArray = this.getDishesList.map(
-          (element) => element.isShown
-        );
-        this.actionSelectedDishesArray(allDishesArray);
+    // ✅
+    selectCategory(param) {
+      const cloneArray = this.getDishesList.map((item) => item);
+      if (param == "all-dishes") {
+        this.actionSelectedDishesArray(cloneArray);
+        this.getMenuList.forEach((item) => (item.selected = false));
+        this.getMenuList[0].selected = true;
       } else {
-        const selectedArray = this.getDishesList.filter((item) => {
-          if (item.category == this.getMenuList[index].category) {
-            return (item.isShown = true);
-          } else {
-            item.isShown = false;
-          }
+        const selectFilterCategory = cloneArray.filter(
+          (item) => item.category === param
+        );
+        this.getMenuList.forEach((item) => {
+          if (item.category === param) item.selected = true;
+          else item.selected = false;
         });
-        this.getMenuList.forEach((element) => (element.selected = false));
-        this.getMenuList[index].selected = true;
-        this.actionSelectedDishesArray(selectedArray);
-        console.log("174 line of HomeView for github");
+        this.actionSelectedDishesArray(selectFilterCategory);
       }
     },
-    // selected qiganda yana bug chiqvotti buni otirib debugging qilish kerak
+    
     selectedOption(par) {
       let parametr = par.target.value;
       console.log("parametr => ", parametr);
