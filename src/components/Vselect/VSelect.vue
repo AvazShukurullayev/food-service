@@ -9,9 +9,8 @@
 
 <script>
 export default {
+  name: "VSelect",
   props: ["selectArray"],
-  methods: {
-  },
 };
 </script>
 

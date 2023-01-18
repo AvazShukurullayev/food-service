@@ -1,6 +1,7 @@
 <template>
   <div class="home">
     <div class="mainSide">
+      <!-- ✅ -->
       <header class="mainSide__header">
         <div>
           <VHeadingOne class="mainSide__title">
@@ -21,15 +22,15 @@
 
       <VList class="menuSide__filter">
         <li
-          v-for="(item, index) in getMenuList"
+          v-for="item in getMenuList"
           class="menuSide__item"
           :class="{ selected: item.selected }"
           @click="selectCategory(item.category)"
         >
           {{ item.name }}
         </li>
-        <!-- ? man shetta argumentga id berib korgan bolardim test qilish uchun -->
       </VList>
+      <!-- ✅ -->
 
       <div class="dishes">
         <VHeadingTwo class="dishes__title">Choose Dishes</VHeadingTwo>
@@ -42,7 +43,7 @@
 
       <div class="dishes__cards">
         <DishesCard
-          v-for="(item, index) in getSelectedDishesList"
+          v-for="(item, index) in tempArray"
           :item="item"
           :index="index"
           @clickedCard="clickedCard"
@@ -93,6 +94,7 @@ export default {
       isShown: true,
       inputWord: "",
       currentTime: "",
+      tempArray: [],
       days: [
         "Sunday",
         "Monday",
@@ -118,6 +120,7 @@ export default {
       ],
     };
   },
+  // ✅
   watch: {
     inputWord(newItem, oldItem) {
       this.getSelectedDishesList.forEach((element) => {
@@ -136,42 +139,39 @@ export default {
     ...mapGetters([
       "getCustomer",
       "getMenuList",
-      "getSelectedDishesList",
+      // "getSelectedDishesList",
       "getDishesList",
       "getOptionalMenu",
       "getMealArray",
     ]),
   },
   mounted() {
-    const allDishesArray = this.getDishesList.map((element) => element);
-    this.actionSelectedDishesArray(allDishesArray);
+    this.tempArray = this.getDishesList.map((element) => element);
   },
   methods: {
-    ...mapActions(["actionSelectedDishesArray", "actionClickedCard"]),
-     // ✅
+    // ...mapActions(["actionSelectedDishesArray", "actionClickedCard"]),
+    // ✅
     getCurrentTime() {
       const today = new Date();
       return (this.currentTime = `${today.getHours()}:${today.getMinutes()}:${today.getSeconds()}`);
     },
     // ✅
     selectCategory(param) {
-      const cloneArray = this.getDishesList.map((item) => item);
       if (param == "all-dishes") {
-        this.actionSelectedDishesArray(cloneArray);
+        this.tempArray = this.getDishesList.map((item) => item);
         this.getMenuList.forEach((item) => (item.selected = false));
         this.getMenuList[0].selected = true;
       } else {
-        const selectFilterCategory = cloneArray.filter(
+        this.tempArray = this.getDishesList.filter(
           (item) => item.category === param
         );
         this.getMenuList.forEach((item) => {
           if (item.category === param) item.selected = true;
           else item.selected = false;
         });
-        this.actionSelectedDishesArray(selectFilterCategory);
       }
     },
-    
+
     selectedOption(par) {
       let parametr = par.target.value;
       console.log("parametr => ", parametr);
@@ -180,6 +180,7 @@ export default {
         console.log("allSelectedOption => ", allSelectedOption);
         this.actionSelectedDishesArray(allSelectedOption);
       } else {
+        // ✅ shetta arrayni olib filter qilib keyin qaytadan yana chizish uchun jonatish
         let filteredArray = this.getDishesList.filter(
           (element) => element.orderDish[parametr]
         );

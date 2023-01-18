@@ -597,7 +597,7 @@ const home = {
         id: 29,
       },
     ],
-    selectedDishesList: [],
+    // selectedDishesList: [],
   },
   getters: {
     getCustomer(state) {
@@ -612,21 +612,14 @@ const home = {
     getDishesList(state) {
       return state.dishesList;
     },
-    getSelectedDishesList(state) {
-      return state.selectedDishesList;
-    },
+    // getSelectedDishesList(state) {
+    //   return state.selectedDishesList;
+    // },
   },
   mutations: {
-    setSelectedDishesArray(state, data) {
-      console.log("Payload", data);
-      state.selectedDishesList = data;
-    },
+    // setSelectedDishesArray(state, d
   },
   actions: {
-    actionSelectedDishesArray({ commit }, payload) {
-      console.log("getSelectedDishesList => ", payload);
-      commit("setSelectedDishesArray", payload);
-    },
   },
 };
 
