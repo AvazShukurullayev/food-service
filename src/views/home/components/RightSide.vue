@@ -5,13 +5,16 @@
         Orders #{{ orderNumber }}
       </VHeadingTwo>
       <div class="rightSide__services">
+        <VParag class="rightSide__serviceType">
+          Service type: {{ serviceValue }}
+        </VParag>
         <template v-for="(item, index) in serviceList">
           <input
             type="radio"
             :id="'check' + index"
             class="rightSide__input"
             name="service"
-            :value="item.service"
+            :value="item.title"
             v-model="serviceValue"
           />
           <VLabel :for="'check' + index" class="rightSide__label">
@@ -22,6 +25,7 @@
 
       <div class="rightSide__info">
         <VParag class="rightSide__info-text">Item</VParag>
+        <!-- <button @click="changeCurrency" class="btn btn-outline-secondary">Change currency: {{  }}</button> -->
         <div>
           <VParag class="rightSide__info-text">Qty</VParag>
           <VParag class="rightSide__info-text">Price</VParag>
@@ -38,7 +42,7 @@
         @removeMeal="$emit('removeItem', $event)"
       />
     </div>
-    
+
     <div class="rightSide__footer">
       <div>
         <!-- ? v-for qilish kere -->
@@ -72,7 +76,6 @@ import VHeadingTwo from "@/components/Vheadings/VHeadingTwo.vue";
 import VParag from "@/components/Vparag/VParag.vue";
 import VLabel from "@/components/Vlabel/VLabel.vue";
 
-import { mapGetters, mapActions } from "vuex";
 export default {
   name: "RightSide",
   props: ["mealArray"],
@@ -80,7 +83,7 @@ export default {
   data() {
     return {
       orderNumber: 34562,
-      mealSum: 100,
+      mealSum: 0,
       service: 0,
       discount: 0,
       serviceValue: "",
@@ -91,12 +94,10 @@ export default {
       ],
     };
   },
-  computed: {
-    ...mapGetters(["getMealArray"]),
-  },
   methods: {
-    total(par) {
-      console.log("rightside => ", par);
+    total() {
+      this.mealArray.forEach((element) => (this.mealSum += element.sum));
+      return Number(this.mealSum.toFixed(2));
     },
   },
 };
@@ -105,7 +106,7 @@ export default {
 <style scoped lang="scss">
 .rightSide {
   width: 409px;
-  padding: 24px;
+  padding: 12px 12px 12px 24px;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -123,10 +124,13 @@ export default {
       font-size: 20px;
       line-height: 140%;
       color: #fff;
-      margin-bottom: 24px;
     }
     .rightSide__services {
       margin-bottom: 24px;
+    }
+    .rightSide__serviceType {
+      color: #fff;
+      margin: 0.5rem 0;
     }
     .rightSide__filter {
       display: flex;
@@ -137,7 +141,7 @@ export default {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding-bottom: 24px;
+      padding-bottom: 10px;
       & > div {
         display: flex;
         column-gap: 43px;
@@ -159,7 +163,7 @@ export default {
   }
   .rightSide__footer {
     border-top: 1px solid #393c49;
-    padding-top: 24px;
+    padding-top: 10px;
     &-card {
       display: flex;
       align-items: center;

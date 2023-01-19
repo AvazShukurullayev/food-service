@@ -13,17 +13,17 @@
             <VParag class="meal__left-price">$ {{ item.price }}</VParag>
           </div>
         </div>
-        <VInput
+        <input
           type="number"
           class="meal__left-counter"
           min="1"
           :max="item.maxLimit"
           v-model.number="item.counter"
         />
-        <!--? type="number" boganda e (eyler soni) ni togirlab qoyish kerak  -->
       </div>
       <div class="meal__left-bottom">
-        <VInput
+        <input
+          type="text"
           class="meal__left-comment"
           v-model="item.comment"
           placeholder="Please, write comments"
