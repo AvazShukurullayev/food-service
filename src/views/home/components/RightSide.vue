@@ -96,9 +96,6 @@ export default {
   computed: {
     ...mapGetters(["getMealArray"]),
   },
-  updated() {
-    // this.total();
-  },
   methods: {
     total() {
       this.getMealArray.forEach((element) => (this.mealSum += element.sum));
