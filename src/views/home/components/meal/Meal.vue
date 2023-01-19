@@ -44,18 +44,25 @@ import VInput from "@/components/Vinput/VInput.vue";
 import VButton from "@/components/Vbutton/VButton.vue";
 import VParag from "@/components/Vparag/VParag.vue";
 
+import { mapGetters } from "vuex";
+
 export default {
   name: "Meal",
-  props: ["item", "index", "mealArray"],
+  props: ["item", "index"],
   components: { VInput, VButton, VParag },
   methods: {
     getSum(index) {
+      console.log("first line => ", this.getMealArray);
       const sumOfMeal = Number(
         (this.item.price * this.item.counter).toFixed(2)
       );
-      this.mealArray[index].sum = sumOfMeal;
+      this.getMealArray[index].sum = sumOfMeal;
+      console.log("second line => ", this.getMealArray);
       return sumOfMeal;
     },
+  },
+  computed: {
+    ...mapGetters(["getMealArray"]),
   },
 };
 </script>

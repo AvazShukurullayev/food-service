@@ -35,27 +35,25 @@
 
     <div class="rightSide__meals">
       <Meal
-        v-for="(item, index) in mealArray"
+        v-for="(item, index) in getMealArray"
         :item="item"
         :index="index"
-        :mealArray="mealArray"
         @removeMeal="$emit('removeItem', $event)"
       />
     </div>
 
     <div class="rightSide__footer">
       <div>
-        <!-- ? v-for qilish kere -->
         <div class="rightSide__footer-card d-flex">
-          <VParag class="rightSide__footer-discount">Discount</VParag>
+          <VParag class="rightSide__footer-title">Discount</VParag>
           <VParag class="rightSide__footer-price">$ {{ discount }}</VParag>
         </div>
         <div class="rightSide__footer-card d-flex">
-          <VParag class="rightSide__footer-discount">Service</VParag>
-          <VParag class="rightSide__footer-price">% {{ service }}</VParag>
+          <VParag class="rightSide__footer-title">Service</VParag>
+          <VParag class="rightSide__footer-price">$ {{ service }}</VParag>
         </div>
         <div class="rightSide__footer-card d-flex">
-          <VParag class="rightSide__footer-discount">Sub total</VParag>
+          <VParag class="rightSide__footer-title">Sub total</VParag>
           <VParag class="rightSide__footer-price">$ {{ total() }}</VParag>
         </div>
       </div>
@@ -76,9 +74,9 @@ import VHeadingTwo from "@/components/Vheadings/VHeadingTwo.vue";
 import VParag from "@/components/Vparag/VParag.vue";
 import VLabel from "@/components/Vlabel/VLabel.vue";
 
+import { mapGetters } from "vuex";
 export default {
   name: "RightSide",
-  props: ["mealArray"],
   components: { VInput, Meal, VButton, VHeadingTwo, VParag, VLabel },
   data() {
     return {
@@ -86,6 +84,7 @@ export default {
       mealSum: 0,
       service: 0,
       discount: 0,
+      totalSum: 0,
       serviceValue: "",
       serviceList: [
         { title: "Dine In", service: 10, icon: "" },
@@ -94,9 +93,15 @@ export default {
       ],
     };
   },
+  computed: {
+    ...mapGetters(["getMealArray"]),
+  },
+  updated() {
+    // this.total();
+  },
   methods: {
     total() {
-      this.mealArray.forEach((element) => (this.mealSum += element.sum));
+      this.getMealArray.forEach((element) => (this.mealSum += element.sum));
       return Number(this.mealSum.toFixed(2));
     },
   },
@@ -168,10 +173,10 @@ export default {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      .rightSide__footer-discount {
+      .rightSide__footer-title {
         font-size: 14px;
         line-height: 140%;
-        color: #abbbc2;
+        color: #fff;
       }
       .rightSide__footer-price {
         font-family: "Barlow-Medium";

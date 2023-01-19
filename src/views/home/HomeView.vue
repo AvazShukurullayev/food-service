@@ -58,7 +58,6 @@
     <!-- ✅ -->
     <RightSide
       v-if="isShown"
-      :mealArray="getMealArray"
       @removeItem="removeItem"
       @moveToPayment="isShown = !isShown"
     />
@@ -102,7 +101,6 @@ export default {
       currentTime: "",
       customerName: "Jonathan Mckinney",
       tempArray: [],
-      tempArrayParams: [],
       days: [
         "Sunday",
         "Monday",
@@ -144,12 +142,7 @@ export default {
     setInterval(this.getCurrentTime, 1000);
   },
   computed: {
-    ...mapGetters([
-      "getMenuList",
-      "getOptionalMenu",
-      "getDishesList",
-      "getMealArray",
-    ]),
+    ...mapGetters(["getMenuList", "getOptionalMenu", "getDishesList","getMealArray"]),
   },
   mounted() {
     this.tempArray = this.getDishesList.map((element) => element);
@@ -188,17 +181,11 @@ export default {
       }
     },
     // ✅
-    // there is a problem 
     clickedCard(par) {
       const checkElement = this.getMealArray.includes(par);
       if (!checkElement) {
         if (par.quantity > 0) {
           this.actionClickedCard(par);
-          const newObj = {
-            id: par.id,
-            quantity: par.quantity,
-          };
-          this.tempArrayParams.push(newObj);
           par.quantity--;
         }
       } else if (checkElement) {
@@ -215,17 +202,6 @@ export default {
         (item) => item.id !== id
       );
       this.actionRemovedElement(removedElMealArray);
-      let quantityNumber;
-      this.tempArrayParams.forEach((item) => {
-        if (item.id === id) quantityNumber = item.quantity;
-      });
-      console.log("quantity number => ", quantityNumber);
-      this.tempArray = this.tempArray.map((item) => {
-        if (item.id === id) {
-          item.quantity = quantityNumber;
-        }
-        return item;
-      });
     },
     // ✅
   },
