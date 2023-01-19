@@ -18,7 +18,7 @@
           class="meal__left-counter"
           min="1"
           :max="item.maxLimit"
-          v-model="item.counter"
+          v-model.number="item.counter"
         />
         <!--? type="number" boganda e (eyler soni) ni togirlab qoyish kerak  -->
       </div>
@@ -32,7 +32,6 @@
     </div>
     <div class="meal__right">
       <VParag class="meal__right-sum">$ {{ getSum(index) }}</VParag>
-
       <VButton class="basket" @click="$emit('removeMeal', item.id)">
         <img src="@/assets/images/basket/basket.svg" alt="basket" />
       </VButton>

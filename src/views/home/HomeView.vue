@@ -56,7 +56,6 @@
       </div>
     </div>
     <!-- ✅ -->
-    <!--? rightside ga meal array bervomman va remove button va move to payment -->
     <RightSide
       v-if="isShown"
       :mealArray="getMealArray"
@@ -64,6 +63,7 @@
       @moveToPayment="isShown = !isShown"
     />
     <Payment v-if="!isShown" @moveToRightSide="isShown = !isShown" />
+    <!-- ✅ -->
   </div>
 </template>
 
@@ -188,6 +188,7 @@ export default {
       }
     },
     // ✅
+    // there is a problem 
     clickedCard(par) {
       const checkElement = this.getMealArray.includes(par);
       if (!checkElement) {

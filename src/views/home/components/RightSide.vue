@@ -5,21 +5,21 @@
         Orders #{{ orderNumber }}
       </VHeadingTwo>
       <div class="rightSide__services">
-        <!--? radio type value beradi  -->
         <template v-for="(item, index) in serviceList">
-          <VInput
+          <input
             type="radio"
             :id="'check' + index"
             class="rightSide__input"
             name="service"
-            v-model="serviceValue"
             :value="item.service"
+            v-model="serviceValue"
           />
-          <VLabel :for="'check' + index" class="rightSide__label">{{
-            item.title
-          }}</VLabel>
+          <VLabel :for="'check' + index" class="rightSide__label">
+            {{ item.title }}
+          </VLabel>
         </template>
       </div>
+
       <div class="rightSide__info">
         <VParag class="rightSide__info-text">Item</VParag>
         <div>
@@ -28,6 +28,7 @@
         </div>
       </div>
     </div>
+
     <div class="rightSide__meals">
       <Meal
         v-for="(item, index) in mealArray"
@@ -37,6 +38,7 @@
         @removeMeal="$emit('removeItem', $event)"
       />
     </div>
+    
     <div class="rightSide__footer">
       <div>
         <!-- ? v-for qilish kere -->
@@ -50,9 +52,7 @@
         </div>
         <div class="rightSide__footer-card d-flex">
           <VParag class="rightSide__footer-discount">Sub total</VParag>
-          <VParag class="rightSide__footer-price"
-            >$ {{ total() }}</VParag
-          >
+          <VParag class="rightSide__footer-price">$ {{ total() }}</VParag>
         </div>
       </div>
       <div class="mt-2">
@@ -83,7 +83,7 @@ export default {
       mealSum: 100,
       service: 0,
       discount: 0,
-      serviceValue: null,
+      serviceValue: "",
       serviceList: [
         { title: "Dine In", service: 10, icon: "" },
         { title: "To Go", service: 15, icon: "" },
